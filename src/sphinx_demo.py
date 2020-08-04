@@ -1,17 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on 2020/8/4 10:41 上午
-
-@File: sphinx_demo.py
-
-@Department: AI Lab, Rockontrol, Chengdu
-
-@Author: luolei
-
-@Email: dreisteine262@163.com
-
-@Describe: Sphinx demo
-"""
 
 import logging
 
