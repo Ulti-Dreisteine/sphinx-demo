@@ -1,0 +1,8 @@
+.idea/
+tmp/
+trash/
+img/
+.DS_Store
+*.xml
+*.iml
+*.pyc
