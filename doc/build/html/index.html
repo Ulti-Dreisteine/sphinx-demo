@@ -5,17 +5,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to sphinx-demo’s documentation! &#8212; sphinx-demo 0.0.1 文档</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <title>PyCaret教程文档 &#8212; sphinx-demo 0.0.1 文档</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
     <script src="_static/translations.js"></script>
-    
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" /> 
   </head><body>
@@ -29,7 +27,7 @@
           <a href="py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">sphinx-demo 0.0.1 文档</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Welcome to sphinx-demo’s documentation!</a></li> 
+        <li class="nav-item nav-item-this"><a href="">PyCaret教程文档</a></li> 
       </ul>
     </div>  
 
@@ -38,100 +36,91 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-to-sphinx-demo-s-documentation">
-<h1>Welcome to sphinx-demo’s documentation!<a class="headerlink" href="#welcome-to-sphinx-demo-s-documentation" title="永久链接至标题">¶</a></h1>
+  <div class="section" id="pycaret">
+<h1>PyCaret教程文档<a class="headerlink" href="#pycaret" title="永久链接至标题">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
+<div class="section" id="classification">
+<h2>分类模型 classification<a class="headerlink" href="#classification" title="永久链接至标题">¶</a></h2>
+<div class="line-block">
+<div class="line">PyCaret的分类模型集成了sklearn中主要的机器学习分类模型, 并能够实现:</div>
+<div class="line">1. 模型自动对比和筛选</div>
+<div class="line">2. 模型自动调参</div>
+<div class="line">3. 模型输出可视化</div>
 </div>
-<div class="section" id="module-src.demo">
-<span id="api"></span><h1>API<a class="headerlink" href="#module-src.demo" title="永久链接至标题">¶</a></h1>
-<p>Created on 2020/8/4 10:41 上午</p>
-<p>&#64;File: sphinx_demo.py</p>
-<p>&#64;Department: AI Lab, Rockontrol, Chengdu</p>
-<p>&#64;Author: luolei</p>
-<p>&#64;Email: <a class="reference external" href="mailto:dreisteine262&#37;&#52;&#48;163&#46;com">dreisteine262<span>&#64;</span>163<span>&#46;</span>com</a></p>
-<p>&#64;Describe: Sphinx demo</p>
-<dl class="py class">
-<dt id="src.demo.SphinxDemo">
-<em class="property">class </em><code class="sig-prename descclassname">src.demo.</code><code class="sig-name descname">SphinxDemo</code><a class="headerlink" href="#src.demo.SphinxDemo" title="永久链接至目标">¶</a></dt>
-<dd><p>类的功能说明</p>
-<dl class="py method">
-<dt id="src.demo.SphinxDemo.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.demo.SphinxDemo.add" title="永久链接至目标">¶</a></dt>
-<dd><p>两个数字相加，并返回结果</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.demo.SphinxDemo.google_style">
-<code class="sig-name descname">google_style</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.demo.SphinxDemo.google_style" title="永久链接至目标">¶</a></dt>
-<dd><p>函数功能.</p>
-<p>函数功能说明.</p>
-<dl class="simple">
-<dt>Args:</dt><dd><p>arg1 (int): arg1的参数说明
-arg2 (str): arg2的参数说明</p>
+<div class="section" id="id1">
+<h3>数据准备<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h3>
+<span class="target" id="module-src.classification"></span><dl class="py function">
+<dt id="src.classification.load_test_data">
+<code class="sig-prename descclassname">src.classification.</code><code class="sig-name descname">load_test_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classification.html#load_test_data"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#src.classification.load_test_data" title="永久链接至目标">¶</a></dt>
+<dd><p>载入测试数据并处理</p>
+<dl class="field-list simple">
+<dt class="field-odd">返回</dt>
+<dd class="field-odd"><p><strong>data</strong></p>
 </dd>
-<dt>Returns:</dt><dd><p>bool: 返回值说明</p>
+<dt class="field-even">返回类型</dt>
+<dd class="field-even"><p>pd.DataFrame, 本地测试数据</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.demo.SphinxDemo.numpy_style">
-<code class="sig-name descname">numpy_style</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">arg2</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.demo.SphinxDemo.numpy_style" title="永久链接至目标">¶</a></dt>
-<dd><p>函数功能.</p>
-<p>函数功能说明.</p>
-<dl class="simple">
-<dt>arg1<span class="classifier">int</span></dt><dd><p>arg1的参数说明</p>
-</dd>
-<dt>arg2<span class="classifier">str</span></dt><dd><p>arg2的参数说明</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>bool</dt><dd><p>返回值说明</p>
-</dd>
-</dl>
-</dd></dl>
-
 </dd></dl>
 
 <dl class="py function">
-<dt id="src.demo.my_function">
-<code class="sig-prename descclassname">src.demo.</code><code class="sig-name descname">my_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.demo.my_function" title="永久链接至目标">¶</a></dt>
-<dd><p>函数功能说明</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_function</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">my_function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="go">&#39;aaa&#39;</span>
-</pre></div>
-</div>
+<dt id="src.classification.process_data">
+<code class="sig-prename descclassname">src.classification.</code><code class="sig-name descname">process_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classification.html#process_data"><span class="viewcode-link">[源代码]</span></a><a class="headerlink" href="#src.classification.process_data" title="永久链接至目标">¶</a></dt>
+<dd><p>数据处理, 去掉多余字段并按照数值型和类别型字段进行值处理</p>
+<dl class="field-list simple">
+<dt class="field-odd">参数</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>pd.DataFrame</em><em>, </em><em>待处理数据表</em>) – </p>
+</dd>
+<dt class="field-even">返回</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>data</strong> (<em>pd.DataFrame, 处理好的数据表</em>)</p></li>
+<li><p><strong>numeric_cols</strong> (<em>list, 数值型字段</em>)</p></li>
+<li><p><strong>categoric_cols</strong> (<em>list, 类别型字段</em>)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
 </dd></dl>
 
-<span class="target" id="module-src.myfunc"></span><p>Created on 2020/8/4 6:21 下午</p>
-<p>&#64;File: myfunc.py</p>
-<p>&#64;Department: AI Lab, Rockontrol, Chengdu</p>
-<p>&#64;Author: luolei</p>
-<p>&#64;Email: <a class="reference external" href="mailto:dreisteine262&#37;&#52;&#48;163&#46;com">dreisteine262<span>&#64;</span>163<span>&#46;</span>com</a></p>
-<p>&#64;Describe:</p>
-<dl class="py function">
-<dt id="src.myfunc.my_function">
-<code class="sig-prename descclassname">src.myfunc.</code><code class="sig-name descname">my_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">a</span></em>, <em class="sig-param"><span class="n">b</span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.myfunc.my_function" title="永久链接至目标">¶</a></dt>
-<dd><p>函数功能说明</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_function</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="go">6</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">my_function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="go">&#39;aaa&#39;</span>
+</div>
+<div class="section" id="id2">
+<h3>建模<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<p>首先setup</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">,</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;VTE&#39;</span><span class="p">,</span>
+    <span class="n">numeric_features</span> <span class="o">=</span> <span class="n">numeric_cols</span><span class="p">,</span>
+    <span class="n">categorical_features</span> <span class="o">=</span> <span class="n">categoric_cols</span><span class="p">,</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">remove_multicollinearity</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">multicollinearity_threshold</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span>
+    <span class="n">ignore_low_variance</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
-</dd></dl>
-
+</div></blockquote>
+<p>各模型对比</p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_store_final</span> <span class="o">=</span> <span class="n">compare_models</span><span class="p">(</span>
+    <span class="n">whitelist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">,</span> <span class="s1">&#39;rf&#39;</span><span class="p">,</span> <span class="s1">&#39;ridge&#39;</span><span class="p">,</span> <span class="s1">&#39;xgboost&#39;</span><span class="p">],</span>
+    <span class="n">sort</span> <span class="o">=</span> <span class="s1">&#39;F1&#39;</span><span class="p">,</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
 </div>
 <div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="永久链接至标题">¶</a></h1>
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">索引</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">模块索引</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">搜索页面</span></a></p></li>
 </ul>
+</div>
 </div>
 
 
@@ -143,9 +132,15 @@ arg2 (str): arg2的参数说明</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">目录</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to sphinx-demo’s documentation!</a></li>
-<li><a class="reference internal" href="#module-src.demo">API</a></li>
+<li><a class="reference internal" href="#">PyCaret教程文档</a><ul>
+<li><a class="reference internal" href="#classification">分类模型 classification</a><ul>
+<li><a class="reference internal" href="#id1">数据准备</a></li>
+<li><a class="reference internal" href="#id2">建模</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+</li>
 </ul>
 
   <div role="note" aria-label="source link">
@@ -179,7 +174,7 @@ arg2 (str): arg2的参数说明</p>
           <a href="py-modindex.html" title="Python 模块索引"
              >模块</a> |</li>
         <li class="nav-item nav-item-0"><a href="#">sphinx-demo 0.0.1 文档</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Welcome to sphinx-demo’s documentation!</a></li> 
+        <li class="nav-item nav-item-this"><a href="">PyCaret教程文档</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
