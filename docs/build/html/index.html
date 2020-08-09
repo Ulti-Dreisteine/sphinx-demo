@@ -1,0 +1,665 @@
+
+
+<!doctype html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyCaret练练手 &#8212; sphinx-demo 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/bizstyle.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">sphinx-demo 0.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PyCaret练练手</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pycaret">
+<h1>PyCaret练练手<a class="headerlink" href="#pycaret" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="classification">
+<h2>分类模型 classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="line-block">
+<div class="line">PyCaret的分类模型集成了sklearn中主要的机器学习分类模型, 并能够实现:</div>
+<div class="line">1. 模型自动对比和筛选</div>
+<div class="line">2. 模型自动调参</div>
+<div class="line">3. 模型输出可视化</div>
+</div>
+</div></blockquote>
+<div class="section" id="id1">
+<h3>数据准备<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<span class="target" id="module-src.classification"></span><dl class="py function">
+<dt id="src.classification.load_test_data">
+<code class="sig-prename descclassname">src.classification.</code><code class="sig-name descname">load_test_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classification.html#load_test_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.classification.load_test_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load local test data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>data: pd.DataFrame, local test data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="src.classification.process_data">
+<code class="sig-prename descclassname">src.classification.</code><code class="sig-name descname">process_data</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/src/classification.html#process_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#src.classification.process_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process data, remove redundant fields and seperate them into numerical and
+categorical types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – pd.DataFrame, data table to be processed</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>data: pd.DataFrame, processed table;
+numeric_cols: list, numerical fields;
+categoric_cols: list, categorical fields;</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="id2">
+<h3>建模<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h4>1. 建立任务<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><p>该步骤是所有PyCaret建模必经初始化步骤.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">setup</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">,</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="s1">&#39;VTE&#39;</span><span class="p">,</span>
+    <span class="n">numeric_features</span> <span class="o">=</span> <span class="n">numeric_cols</span><span class="p">,</span>
+    <span class="n">categorical_features</span> <span class="o">=</span> <span class="n">categoric_cols</span><span class="p">,</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">remove_multicollinearity</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">multicollinearity_threshold</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span>
+    <span class="n">ignore_low_variance</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt><strong>【注意】</strong></dt><dd><ol class="arabic simple">
+<li><p>target, numerical_features和categorical_features相互独立;</p></li>
+<li><p>在setup过程中可以对特征进行处理, 比如上述代码中对特征进行了共线性筛选并忽略了
+低方差特征;</p></li>
+</ol>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="id4">
+<h4>2. 各模型对比<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><div class="line-block">
+<div class="line">在这一步中将会把测试数据代入PyCaret所有已经集成好的分类模型中进行训练, 计算各自的AUC,</div>
+<div class="line">Recall, F1, Precision等指标, 保存在图表中.</div>
+</div>
+<p>在PyCaret中各模型名称缩写如下:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 76%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>ID</p></th>
+<th class="head"><p>Name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>lr</p></td>
+<td><p>Logistic Regression</p></td>
+</tr>
+<tr class="row-odd"><td><p>knn</p></td>
+<td><p>K Nearest Neighbour</p></td>
+</tr>
+<tr class="row-even"><td><p>nb</p></td>
+<td><p>Naive Bayes</p></td>
+</tr>
+<tr class="row-odd"><td><p>dt</p></td>
+<td><p>Decision Tree Classifier</p></td>
+</tr>
+<tr class="row-even"><td><p>svm</p></td>
+<td><p>SVM - Linear Kernel</p></td>
+</tr>
+<tr class="row-odd"><td><p>rbfsvm</p></td>
+<td><p>SVM - Radial Kernel</p></td>
+</tr>
+<tr class="row-even"><td><p>gpc</p></td>
+<td><p>Gaussian Process Classifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>mlp</p></td>
+<td><p>Multi Level Perceptron</p></td>
+</tr>
+<tr class="row-even"><td><p>ridge</p></td>
+<td><p>Ridge Classifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>rf</p></td>
+<td><p>Random Forest Classifier</p></td>
+</tr>
+<tr class="row-even"><td><p>qda</p></td>
+<td><p>Quadratic Discriminant Analysis</p></td>
+</tr>
+<tr class="row-odd"><td><p>ada</p></td>
+<td><p>Ada Boost Classifier</p></td>
+</tr>
+<tr class="row-even"><td><p>gbc</p></td>
+<td><p>Gradient Boosting Classifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>lda</p></td>
+<td><p>Linear Discriminant Analysis</p></td>
+</tr>
+<tr class="row-even"><td><p>et</p></td>
+<td><p>Extra Trees Classifier</p></td>
+</tr>
+<tr class="row-odd"><td><p>xgboost</p></td>
+<td><p>Extreme Gradient Boosting</p></td>
+</tr>
+<tr class="row-even"><td><p>lightgbm</p></td>
+<td><p>Light Gradient Boosting</p></td>
+</tr>
+<tr class="row-odd"><td><p>catboost</p></td>
+<td><p>CatBoost Classifier</p></td>
+</tr>
+</tbody>
+</table>
+<div class="line-block">
+<div class="line">如果需要计算某些特定模型, 可将其加入whitelist中; 反之, 如果想避免某些模型计算, 则将其加入blacklist中,</div>
+<div class="line">代码如下:</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_store_final</span> <span class="o">=</span> <span class="n">compare_models</span><span class="p">(</span>
+    <span class="n">whitelist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">,</span> <span class="s1">&#39;rf&#39;</span><span class="p">,</span> <span class="s1">&#39;ridge&#39;</span><span class="p">,</span> <span class="s1">&#39;xgboost&#39;</span><span class="p">],</span>
+    <span class="n">sort</span> <span class="o">=</span> <span class="s1">&#39;F1&#39;</span><span class="p">,</span>
+    <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>评估所得结果如下:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 2%" />
+<col style="width: 32%" />
+<col style="width: 11%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 7%" />
+<col style="width: 10%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>id</p></th>
+<th class="head"><p>Model</p></th>
+<th class="head"><p>Accuracy</p></th>
+<th class="head"><p>AUC</p></th>
+<th class="head"><p>Recall</p></th>
+<th class="head"><p>Prec.</p></th>
+<th class="head"><p>F1</p></th>
+<th class="head"><p>Kappa</p></th>
+<th class="head"><p>MCC</p></th>
+<th class="head"><p>TT (Sec)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>Extreme Gradient Boosting</p></td>
+<td><p>0.7754</p></td>
+<td><p>0.7253</p></td>
+<td><p>0.2319</p></td>
+<td><p>0.4844</p></td>
+<td><p>0.3071</p></td>
+<td><p>0.1909</p></td>
+<td><p>0.2137</p></td>
+<td><p>0.1909</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>Ridge Classifier</p></td>
+<td><p>0.7898</p></td>
+<td><p>0.0000</p></td>
+<td><p>0.1802</p></td>
+<td><p>0.5438</p></td>
+<td><p>0.2620</p></td>
+<td><p>0.1755</p></td>
+<td><p>0.2144</p></td>
+<td><p>0.0099</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>Logistic Regression</p></td>
+<td><p>0.7802</p></td>
+<td><p>0.7477</p></td>
+<td><p>0.1780</p></td>
+<td><p>0.5021</p></td>
+<td><p>0.2559</p></td>
+<td><p>0.1575</p></td>
+<td><p>0.1914</p></td>
+<td><p>0.0422</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>Random Forest Classifier</p></td>
+<td><p>0.7834</p></td>
+<td><p>0.7108</p></td>
+<td><p>0.1198</p></td>
+<td><p>0.4425</p></td>
+<td><p>0.1803</p></td>
+<td><p>0.1101</p></td>
+<td><p>0.1389</p></td>
+<td><p>0.0301</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+</div>
+<div class="section" id="id5">
+<h4>3. 单模型计算<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><p>首先建立单个模型:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;min_samples_leaf&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">create_model</span><span class="p">(</span><span class="s1">&#39;rf&#39;</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>模型默认采用10折检验, 计算结果保留小数点后4位. 得到的各指标如下:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 18%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>fold</p></th>
+<th class="head"><p>Accuracy</p></th>
+<th class="head"><p>AUC</p></th>
+<th class="head"><p>Recall</p></th>
+<th class="head"><p>Prec.</p></th>
+<th class="head"><p>F1</p></th>
+<th class="head"><p>Kappa</p></th>
+<th class="head"><p>MCC</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0.7937</p></td>
+<td><p>0.6754</p></td>
+<td><p>0.1538</p></td>
+<td><p>0.5000</p></td>
+<td><p>0.2353</p></td>
+<td><p>0.1531</p></td>
+<td><p>0.1889</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0.7778</p></td>
+<td><p>0.7115</p></td>
+<td><p>0.0000</p></td>
+<td><p>0.0000</p></td>
+<td><p>0.0000</p></td>
+<td><p>-0.0304</p></td>
+<td><p>-0.0648</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0.8413</p></td>
+<td><p>0.7538</p></td>
+<td><p>0.3077</p></td>
+<td><p>0.8000</p></td>
+<td><p>0.4444</p></td>
+<td><p>0.3725</p></td>
+<td><p>0.4307</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>0.8095</p></td>
+<td><p>0.8469</p></td>
+<td><p>0.0769</p></td>
+<td><p>1.0000</p></td>
+<td><p>0.1429</p></td>
+<td><p>0.1168</p></td>
+<td><p>0.2491</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>0.7778</p></td>
+<td><p>0.6356</p></td>
+<td><p>0.1429</p></td>
+<td><p>0.5000</p></td>
+<td><p>0.2222</p></td>
+<td><p>0.1370</p></td>
+<td><p>0.1740</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>0.7619</p></td>
+<td><p>0.7376</p></td>
+<td><p>0.0714</p></td>
+<td><p>0.3333</p></td>
+<td><p>0.1176</p></td>
+<td><p>0.0426</p></td>
+<td><p>0.0598</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>0.7619</p></td>
+<td><p>0.6633</p></td>
+<td><p>0.0000</p></td>
+<td><p>0.0000</p></td>
+<td><p>0.0000</p></td>
+<td><p>-0.0305</p></td>
+<td><p>-0.0679</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>0.7460</p></td>
+<td><p>0.6093</p></td>
+<td><p>0.2143</p></td>
+<td><p>0.3750</p></td>
+<td><p>0.2727</p></td>
+<td><p>0.1325</p></td>
+<td><p>0.1402</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>0.7581</p></td>
+<td><p>0.6931</p></td>
+<td><p>0.0769</p></td>
+<td><p>0.2500</p></td>
+<td><p>0.1176</p></td>
+<td><p>0.0211</p></td>
+<td><p>0.0260</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>0.8065</p></td>
+<td><p>0.7818</p></td>
+<td><p>0.1538</p></td>
+<td><p>0.6667</p></td>
+<td><p>0.2500</p></td>
+<td><p>0.1860</p></td>
+<td><p>0.2531</p></td>
+</tr>
+<tr class="row-even"><td><p>Mean</p></td>
+<td><p>0.7834</p></td>
+<td><p>0.7108</p></td>
+<td><p>0.1198</p></td>
+<td><p>0.4425</p></td>
+<td><p>0.1803</p></td>
+<td><p>0.1101</p></td>
+<td><p>0.1389</p></td>
+</tr>
+<tr class="row-odd"><td><p>SD</p></td>
+<td><p>0.0277</p></td>
+<td><p>0.0678</p></td>
+<td><p>0.0904</p></td>
+<td><p>0.3067</p></td>
+<td><p>0.1274</p></td>
+<td><p>0.1139</p></td>
+<td><p>0.1474</p></td>
+</tr>
+</tbody>
+</table>
+<p>模型获得了平均指标和对应的标准差.</p>
+<p>接下来, 可以使用PyCaret中的模型调参进行优化, 使用的算法为Stratified Cross Validation.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">clf_tuned</span> <span class="o">=</span> <span class="n">tune_model</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">optimize</span> <span class="o">=</span> <span class="s1">&#39;F1&#39;</span><span class="p">,</span> <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">fold</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="nb">round</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>得到的指标为:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 8%" />
+<col style="width: 18%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>fold</p></th>
+<th class="head"><p>Accuracy</p></th>
+<th class="head"><p>AUC</p></th>
+<th class="head"><p>Recall</p></th>
+<th class="head"><p>Prec.</p></th>
+<th class="head"><p>F1</p></th>
+<th class="head"><p>Kappa</p></th>
+<th class="head"><p>MCC</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0.7460</p></td>
+<td><p>0.6577</p></td>
+<td><p>0.1538</p></td>
+<td><p>0.2857</p></td>
+<td><p>0.2000</p></td>
+<td><p>0.0649</p></td>
+<td><p>0.0693</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>0.8413</p></td>
+<td><p>0.8038</p></td>
+<td><p>0.3077</p></td>
+<td><p>0.8000</p></td>
+<td><p>0.4444</p></td>
+<td><p>0.3725</p></td>
+<td><p>0.4307</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>0.8095</p></td>
+<td><p>0.8085</p></td>
+<td><p>0.1538</p></td>
+<td><p>0.6667</p></td>
+<td><p>0.2500</p></td>
+<td><p>0.1871</p></td>
+<td><p>0.2543</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>0.7778</p></td>
+<td><p>0.7177</p></td>
+<td><p>0.1538</p></td>
+<td><p>0.4000</p></td>
+<td><p>0.2222</p></td>
+<td><p>0.1215</p></td>
+<td><p>0.1405</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>0.8254</p></td>
+<td><p>0.7529</p></td>
+<td><p>0.4286</p></td>
+<td><p>0.6667</p></td>
+<td><p>0.5217</p></td>
+<td><p>0.4211</p></td>
+<td><p>0.4364</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>0.7778</p></td>
+<td><p>0.7762</p></td>
+<td><p>0.1429</p></td>
+<td><p>0.5000</p></td>
+<td><p>0.2222</p></td>
+<td><p>0.1370</p></td>
+<td><p>0.1740</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>0.8413</p></td>
+<td><p>0.8061</p></td>
+<td><p>0.4286</p></td>
+<td><p>0.7500</p></td>
+<td><p>0.5455</p></td>
+<td><p>0.4578</p></td>
+<td><p>0.4842</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>0.7778</p></td>
+<td><p>0.6370</p></td>
+<td><p>0.2143</p></td>
+<td><p>0.5000</p></td>
+<td><p>0.3000</p></td>
+<td><p>0.1923</p></td>
+<td><p>0.2168</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>0.7419</p></td>
+<td><p>0.6319</p></td>
+<td><p>0.1538</p></td>
+<td><p>0.2857</p></td>
+<td><p>0.2000</p></td>
+<td><p>0.0624</p></td>
+<td><p>0.0666</p></td>
+</tr>
+<tr class="row-odd"><td><p>9</p></td>
+<td><p>0.8065</p></td>
+<td><p>0.8116</p></td>
+<td><p>0.1538</p></td>
+<td><p>0.6667</p></td>
+<td><p>0.2500</p></td>
+<td><p>0.1860</p></td>
+<td><p>0.2531</p></td>
+</tr>
+<tr class="row-even"><td><p>Mean</p></td>
+<td><p>0.7945</p></td>
+<td><p>0.7403</p></td>
+<td><p>0.2291</p></td>
+<td><p>0.5521</p></td>
+<td><p>0.3156</p></td>
+<td><p>0.2203</p></td>
+<td><p>0.2526</p></td>
+</tr>
+<tr class="row-odd"><td><p>SD</p></td>
+<td><p>0.0341</p></td>
+<td><p>0.0702</p></td>
+<td><p>0.1103</p></td>
+<td><p>0.1762</p></td>
+<td><p>0.1284</p></td>
+<td><p>0.1374</p></td>
+<td><p>0.1440</p></td>
+</tr>
+</tbody>
+</table>
+<p>可以看出, 优化后的模型在目标指标上得到了显著提升.</p>
+<dl>
+<dt><strong>【注意】</strong></dt><dd><div class="line-block">
+<div class="line">1. PyCaret中经过tune_model优化后的模型参数可能不合理, 比如优化后的随机森林模型最大树深度max_depth可</div>
+<div class="line">达20, 目前也没有发现可以提供给用户进行参数边界设置的接口, 可能相关功能还在迭代中;</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+</div>
+<div class="section" id="id6">
+<h4>4. 模型可视化评估<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<blockquote>
+<div><div class="line-block">
+<div class="line">PyCaret中提供了plot_model, evaluate_model, interpret_model等函数, 方便进行模型效果评估, 解释和可视化.</div>
+<div class="line">其中, 模型评估提供了Hyperparameters, AUC, Confusion Matrix, Threshold, PR Curve, Error, Class Report,</div>
+<div class="line">Feature Selection, Learning Curve, Manifold Learning等功能.</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evaluate_model</span><span class="p">(</span><span class="n">clf_tuned</span><span class="p">)</span>
+<span class="n">interpret_model</span><span class="p">(</span><span class="n">clf_tuned</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="s1">&#39;correlation&#39;</span><span class="p">)</span>
+<span class="n">interpret_model</span><span class="p">(</span><span class="n">clf_tuned</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="s1">&#39;reason&#39;</span><span class="p">,</span> <span class="n">observation</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl>
+<dt><strong>【注意】</strong></dt><dd><div class="line-block">
+<div class="line">1. 模型解释interpret_model只能用于树模型, 且偶尔会因为对底层shap包的调用报错, 目前未找到解决办法;</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PyCaret练练手</a><ul>
+<li><a class="reference internal" href="#classification">分类模型 classification</a><ul>
+<li><a class="reference internal" href="#id1">数据准备</a></li>
+<li><a class="reference internal" href="#id2">建模</a><ul>
+<li><a class="reference internal" href="#id3">1. 建立任务</a></li>
+<li><a class="reference internal" href="#id4">2. 各模型对比</a></li>
+<li><a class="reference internal" href="#id5">3. 单模型计算</a></li>
+<li><a class="reference internal" href="#id6">4. 模型可视化评估</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">sphinx-demo 0.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">PyCaret练练手</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, dreisteine.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.2.
+    </div>
+  </body>
+</html>
